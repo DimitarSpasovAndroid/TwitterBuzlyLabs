@@ -17,10 +17,14 @@ public class NetworkServiceImpl implements NetworkService {
     public void disposeAsyncTask() {
 
         if (asyncTask != null) {
+
             if (asyncTask.getStatus() == AsyncTask.Status.RUNNING) {
+
                 asyncTask.cancel(true);
                 asyncTask = null;
+                
             }
+
         }
 
     }

@@ -121,8 +121,10 @@ public class TweetsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public void clearAdapter() {
+
         tweetList.clear();
         notifyDataSetChanged();
+
     }
 
     private void setOnClickListener(View view, TweetModel tweetData) {

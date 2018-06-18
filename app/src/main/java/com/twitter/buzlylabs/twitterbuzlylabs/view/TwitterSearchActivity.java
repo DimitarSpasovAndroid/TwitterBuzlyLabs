@@ -40,6 +40,7 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -53,8 +54,10 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
 
     @Override
     protected void onStop() {
+
         super.onStop();
         presenter.onStop();
+
     }
 
     @Override
@@ -89,6 +92,7 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
         recyclerView.setAdapter(tweetsAdapter);
 
         final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -97,18 +101,22 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
                     presenter.queryTweets(searchText);
                 }
             }
+
         };
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+
             @Override
             public boolean onClose() {
                 recyclerView.removeOnScrollListener(scrollListener);
                 tweetsAdapter.clearAdapter();
                 return true;
             }
+
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String s) {
                 TwitterSearchActivity.this.searchText = s;
@@ -123,6 +131,7 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
             public boolean onQueryTextChange(String s) {
                 return false;
             }
+
         });
 
     }
