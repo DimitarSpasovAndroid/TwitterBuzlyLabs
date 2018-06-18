@@ -10,7 +10,7 @@ import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchView;
 
 public class NetworkServiceImpl implements NetworkService {
 
-    FetchTweetsAsyncTask asyncTask;
+    private FetchTweetsAsyncTask asyncTask;
 
     @Override
     public void disposeAsyncTask() {

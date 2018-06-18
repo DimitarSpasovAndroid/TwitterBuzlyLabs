@@ -9,8 +9,8 @@ import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchView;
 
 public class TweetsPresenterImpl implements TweetsPresenter{
 
-    TwitterSearchView view;
-    NetworkService networkService;;
+    private TwitterSearchView view;
+    private NetworkService networkService;;
 
     public TweetsPresenterImpl(TwitterSearchView view, NetworkService networkService){
         this.view = view;
