@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TwitterBuzlyLabs</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search tweets</string>
+    <string name="error">Error while fetching tweets</string>
+    <string name="searching">Fetching tweets</string>
+
+    <string name="TWIT_CONS_KEY" translatable="false">0iY9F0nRR2LJlffNdSVwGDGZQ</string>
+    <string name="TWIT_CONS_SEC_KEY" translatable="false">QZiMuhUnH9Ra5AvieGedhatAZdeXcFfzNFrps6JZB9QK8pcKoU</string>
+
+</resources>
