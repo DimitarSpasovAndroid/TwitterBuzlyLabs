@@ -22,7 +22,7 @@ public class NetworkServiceImpl implements NetworkService {
 
                 asyncTask.cancel(true);
                 asyncTask = null;
-                
+
             }
 
         }

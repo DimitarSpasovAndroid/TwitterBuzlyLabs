@@ -6,26 +6,26 @@
     android:clickable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="@dimen/screen_padding">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="@dimen/screen_padding">
 
         <ImageView
             android:id="@+id/avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp" />
+            android:padding="4dp" />
 
         <TextView
             android:id="@+id/txtTweetBy"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="start|center_horizontal"
-            android:padding="5dp"
+            android:padding="@dimen/screen_padding"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_18"
             android:textStyle="bold" />
@@ -35,13 +35,13 @@
         android:id="@+id/txtTweet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
+        android:paddingBottom="@dimen/screen_padding"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_16" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="@android:color/darker_gray" />
 
 </LinearLayout>
