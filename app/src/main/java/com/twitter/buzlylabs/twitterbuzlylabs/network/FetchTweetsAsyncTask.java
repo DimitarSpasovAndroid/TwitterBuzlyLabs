@@ -81,7 +81,7 @@ public class FetchTweetsAsyncTask extends AsyncTask<String, Void, Integer> {
         if (integer == SUCCESS) {
             listener.addNewTweets(tweets);
         } else {
-            Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.error, Toast.LENGTH_LONG).show();
         }
     }
 

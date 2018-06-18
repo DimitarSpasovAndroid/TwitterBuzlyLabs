@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -120,12 +121,14 @@ public class TwitterSearchActivity extends AppCompatActivity implements TwitterS
 
             @Override
             public boolean onQueryTextSubmit(String s) {
+
                 TwitterSearchActivity.this.searchText = s;
                 recyclerView.addOnScrollListener(scrollListener);
                 tweetsAdapter = new TweetsRecyclerAdapter(TwitterSearchActivity.this);
                 recyclerView.setAdapter(tweetsAdapter);
                 presenter.queryTweets(s);
                 return true;
+
             }
 
             @Override
