@@ -32,13 +32,13 @@ public class TwitterSearchActivity extends AppCompatActivity implements TwitterS
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    String searchText;
+    private String searchText;
 
-    TweetsRecyclerAdapter tweetsAdapter;
+    private TweetsRecyclerAdapter tweetsAdapter;
 
     private long lastTweetId = -1;
 
-    TweetsPresenter presenter;
+    private TweetsPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
