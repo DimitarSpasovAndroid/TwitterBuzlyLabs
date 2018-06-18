@@ -120,7 +120,7 @@ public class FetchTweetsAsyncTask extends AsyncTask<String, Void, Integer> {
             }
 
         } else {
-            //If we have the token stored used stored token. That way we won't have to fetch the token every time we make an API request.
+            //If we have the token stored use the stored token. That way we won't have to fetch the token every time we make an API request.
             try {
 
                 String messageAfterDecrypt = AESCrypt.decrypt(Constants.ENCRYPTION_KEY, tokenString);
