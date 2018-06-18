@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Created by Dimitar Spasov .
  */
 
-public interface TweetsView {
+public interface TwitterSearchView {
 
-    void setTweets(ArrayList<TweetModel> tweets);
+    void addNewTweets(ArrayList<TweetModel> tweets);
 
     long getLastTweetId();
 

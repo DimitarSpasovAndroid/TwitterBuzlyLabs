@@ -23,9 +23,12 @@ import com.twitter.buzlylabs.twitterbuzlylabs.R;
 import com.twitter.buzlylabs.twitterbuzlylabs.model.TweetModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -141,6 +144,8 @@ public class TweetsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 dialog.setContentView(wv);
 
                 String url = Constants.BASE_TWITTER_URL + tweetData.getUserName() + Constants.TWITTER_STATUS + tweetData.getTweetId();
+
+                Timber.d("URL IS : "+url);
 
                 wv.loadUrl(url);
 

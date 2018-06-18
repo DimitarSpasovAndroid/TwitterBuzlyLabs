@@ -8,4 +8,5 @@ public interface TweetsPresenter {
 
     void queryTweets(String query);
     void onStop();
+
 }

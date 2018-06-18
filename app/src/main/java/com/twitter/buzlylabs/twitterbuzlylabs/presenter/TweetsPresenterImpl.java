@@ -1,10 +1,7 @@
 package com.twitter.buzlylabs.twitterbuzlylabs.presenter;
 
-import android.content.Context;
-
 import com.twitter.buzlylabs.twitterbuzlylabs.network.NetworkService;
-import com.twitter.buzlylabs.twitterbuzlylabs.view.TweetsView;
-import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchActivity;
+import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchView;
 
 /**
  * Created by Dimitar Spasov .
@@ -12,14 +9,13 @@ import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchActivity;
 
 public class TweetsPresenterImpl implements TweetsPresenter{
 
-    TweetsView view;
+    TwitterSearchView view;
     NetworkService networkService;;
 
-    public TweetsPresenterImpl(TweetsView view, NetworkService networkService){
+    public TweetsPresenterImpl(TwitterSearchView view, NetworkService networkService){
         this.view = view;
         this.networkService = networkService;
     }
-
 
     @Override
     public void onStop() {

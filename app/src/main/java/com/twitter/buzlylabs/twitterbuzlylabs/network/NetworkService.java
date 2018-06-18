@@ -1,8 +1,6 @@
 package com.twitter.buzlylabs.twitterbuzlylabs.network;
 
-import android.content.Context;
-
-import com.twitter.buzlylabs.twitterbuzlylabs.view.TweetsView;
+import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchView;
 
 /**
  * Created by Dimitar Spasov .
@@ -10,6 +8,7 @@ import com.twitter.buzlylabs.twitterbuzlylabs.view.TweetsView;
 
 public interface NetworkService {
 
-    void fetchTweets(String queryString,TweetsView listener);
+    void fetchTweets(String queryString,TwitterSearchView listener);
     void disposeAsyncTask();
+
 }

@@ -7,6 +7,7 @@ import butterknife.ButterKnife;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +23,7 @@ import com.twitter.buzlylabs.twitterbuzlylabs.presenter.TweetsPresenterImpl;
  * Created by Dimitar Spasov .
  */
 
-public class TwitterSearchActivity extends AppCompatActivity implements TweetsView {
+public class TwitterSearchActivity extends AppCompatActivity implements TwitterSearchView {
 
     @BindView(R.id.searchView)
     SearchView searchView;
@@ -61,7 +62,7 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
     }
 
     @Override
-    public void setTweets(ArrayList<TweetModel> tweets) {
+    public void addNewTweets(ArrayList<TweetModel> tweets) {
         tweetsAdapter.addItems(tweets);
     }
 
@@ -91,7 +92,7 @@ public class TwitterSearchActivity extends AppCompatActivity implements TweetsVi
         tweetsAdapter = new TweetsRecyclerAdapter(TwitterSearchActivity.this);
         recyclerView.setAdapter(tweetsAdapter);
 
-        final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

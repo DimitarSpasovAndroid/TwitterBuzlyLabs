@@ -1,9 +1,8 @@
 package com.twitter.buzlylabs.twitterbuzlylabs.network;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
-import com.twitter.buzlylabs.twitterbuzlylabs.view.TweetsView;
+import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchView;
 
 /**
  * Created by Dimitar Spasov .
@@ -30,7 +29,7 @@ public class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void fetchTweets(String queryString, TweetsView listener) {
+    public void fetchTweets(String queryString, TwitterSearchView listener) {
 
         asyncTask = new FetchTweetsAsyncTask(listener);
         asyncTask.execute(queryString);

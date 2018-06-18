@@ -2,16 +2,22 @@ package com.twitter.buzlylabs.twitterbuzlylabs.network;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.provider.SyncStateContract;
 import android.widget.Toast;
 
+import com.scottyab.aescrypt.AESCrypt;
 import com.twitter.buzlylabs.twitterbuzlylabs.Constants;
 import com.twitter.buzlylabs.twitterbuzlylabs.R;
 import com.twitter.buzlylabs.twitterbuzlylabs.model.TweetModel;
-import com.twitter.buzlylabs.twitterbuzlylabs.view.TweetsView;
+import com.twitter.buzlylabs.twitterbuzlylabs.view.TwitterSearchView;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.crypto.SecretKey;
 
 import timber.log.Timber;
 import twitter4j.Query;
@@ -33,11 +39,11 @@ public class FetchTweetsAsyncTask extends AsyncTask<String, Void, Integer> {
     private final int SUCCESS = 0;
     private final int FAILURE = SUCCESS + 1;
     private ProgressDialog dialog;
-    private TweetsView listener;
+    private TwitterSearchView listener;
     private OAuth2Token token;
     private QueryResult result;
 
-    public FetchTweetsAsyncTask(TweetsView listener) {
+    public FetchTweetsAsyncTask(TwitterSearchView listener) {
         this.listener = listener;
         context = listener.getContext();
     }
@@ -73,7 +79,7 @@ public class FetchTweetsAsyncTask extends AsyncTask<String, Void, Integer> {
         dialog.dismiss();
 
         if (integer == SUCCESS) {
-            listener.setTweets(tweets);
+            listener.addNewTweets(tweets);
         } else {
             Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_LONG).show();
         }
@@ -87,12 +93,44 @@ public class FetchTweetsAsyncTask extends AsyncTask<String, Void, Integer> {
 
     private void authenticate() throws TwitterException {
 
-        ConfigurationBuilder builder = new ConfigurationBuilder();
-        builder.setApplicationOnlyAuthEnabled(true);
-        builder.setOAuthConsumerKey(context.getString(R.string.TWIT_CONS_KEY));
-        builder.setOAuthConsumerSecret(context.getString(R.string.TWIT_CONS_SEC_KEY));
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.SHARED_PREFS_FILE, Context.MODE_PRIVATE);
 
-        token = new TwitterFactory(builder.build()).getInstance().getOAuth2Token();
+        String tokenString = sharedPreferences.getString(Constants.SHARED_PREFS_TOKEN_KEY, null);
+
+        //Fetch token only if we don't have it stored.
+        if (tokenString == null) {
+
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            builder.setApplicationOnlyAuthEnabled(true);
+            builder.setOAuthConsumerKey(context.getString(R.string.TWIT_CONS_KEY));
+            builder.setOAuthConsumerSecret(context.getString(R.string.TWIT_CONS_SEC_KEY));
+
+            token = new TwitterFactory(builder.build()).getInstance().getOAuth2Token();
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            try {
+
+                String encryptedMsg = AESCrypt.encrypt(Constants.ENCRYPTION_KEY, token.getAccessToken());
+                editor.putString(Constants.SHARED_PREFS_TOKEN_KEY, encryptedMsg);
+                editor.apply();
+
+            } catch (GeneralSecurityException e) {
+                Timber.e(e);
+            }
+
+        } else {
+            //If we have the token stored used stored token. That way we won't have to fetch the token every time we make an API request.
+            try {
+
+                String messageAfterDecrypt = AESCrypt.decrypt(Constants.ENCRYPTION_KEY, tokenString);
+                token = new OAuth2Token(Constants.TOKEN_TYPE, messageAfterDecrypt);
+
+            } catch (GeneralSecurityException e) {
+                Timber.e(e);
+            }
+
+        }
     }
 
     private void query(String queryString) throws TwitterException {
@@ -117,7 +155,7 @@ public class FetchTweetsAsyncTask extends AsyncTask<String, Void, Integer> {
         result = twitter.search(query);
     }
 
-    private void parseData(){
+    private void parseData() {
         List<twitter4j.Status> tweets = result.getTweets();
         if (tweets != null) {
             this.tweets = new ArrayList<TweetModel>();

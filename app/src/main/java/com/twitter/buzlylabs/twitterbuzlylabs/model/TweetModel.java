@@ -49,7 +49,9 @@ public class TweetModel {
     }
 
     public void setProfileImageUrl(String profileImageUrl) {
+
         this.profileImageUrl = profileImageUrl;
+
     }
 
 }
